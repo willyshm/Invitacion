@@ -1,223 +1,314 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Willy cumple 20 🎉</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willy cumple 20 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at center, #0f0f1a 0%, #050510 100%);
-      color: white;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      position: relative;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #0f0f1a 0%, #050510 100%);
+            color: white;
+            min-height: 100dvh;
+            /* ✅ se adapta a pantallas móviles sin cortar */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 10px;
+            /* ✅ evita que el contenido toque los bordes */
+        }
+html, body {
+  max-height: 100dvh;
+  overflow-x: hidden;
+}
+        h1,
+        h2,
+        h3,
+        p {
+            opacity: 0;
+            transform: scale(0) translateY(50px);
+        }
 
-    h1, h2, h3, p {
-      opacity: 0;
-      transform: scale(0) translateY(50px);
-    }
+        .visible {
+            opacity: 1;
+            animation: zoomIn 1s ease forwards, balance 3s ease-in-out 1s infinite;
+        }
 
-    .visible {
-      opacity: 1;
-      animation: zoomIn 1s ease forwards, balance 3s ease-in-out 1s infinite;
-    }
+        @keyframes zoomIn {
+            0% {
+                transform: scale(3) translateY(80px);
+                opacity: 0;
+            }
 
-    @keyframes zoomIn {
-      0% {
-        transform: scale(3) translateY(80px);
-        opacity: 0;
-      }
-      60% {
-        transform: scale(1.1) translateY(0);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
-    }
+            60% {
+                transform: scale(1.1) translateY(0);
+                opacity: 1;
+            }
 
-    @keyframes balance {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      25% { transform: scale(1) rotate(-1deg); }
-      50% { transform: scale(1) rotate(1deg); }
-      75% { transform: scale(1) rotate(-1deg); }
-    }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
 
-    h1 {
-      font-size: 1.8rem;
-      color: #00ffff;
-      text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
-    }
+        @keyframes balance {
 
-    h2 {
-      font-size: 1.4rem;
-      color: #ff00ff;
-      text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
-    }
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
 
-    h3 {
-      font-size: 1.2rem;
-      color: #00ff99;
-      margin-top: 10px;
-      text-shadow: 0 0 15px #00ff99, 0 0 30px #00ff99;
-    }
+            25% {
+                transform: scale(1) rotate(-1deg);
+            }
 
-    p {
-      font-size: 1rem;
-      color: #ffffff;
-      margin-top: 20px;
-    }
+            50% {
+                transform: scale(1) rotate(1deg);
+            }
 
-    .btn {
-      margin-top: 25px;
-      display: inline-block;
-      background: linear-gradient(90deg, #ff00ff, #00ffff);
-      padding: 12px 25px;
-      border-radius: 30px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00ffff;
-      transform: scale(0);
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
+            75% {
+                transform: scale(1) rotate(-1deg);
+            }
+        }
 
-    .btn.visible {
-      transform: scale(1);
-      opacity: 1;
-      animation: balanceBtn 4s ease-in-out infinite;
-    }
+        h1 {
+            font-size: 1.8rem;
+            color: #00ffff;
+            text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+        }
 
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #ff00ff;
-    }
+        h2 {
+            font-size: 1.4rem;
+            color: #ff00ff;
+            text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+        }
 
-    .btn2 {
-      margin-top: 15px;
-      display: inline-block;
-      background: linear-gradient(90deg, #00ff99, #0099ff);
-      padding: 12px 25px;
-      border-radius: 30px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00ff99;
-      transform: scale(0);
-      opacity: 0;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
+        h3 {
+            font-size: 1.2rem;
+            color: #00ff99;
+            margin-top: 10px;
+            text-shadow: 0 0 15px #00ff99, 0 0 30px #00ff99;
+        }
 
-    .btn2.visible {
-      transform: scale(1);
-      opacity: 1;
-      animation: balanceBtn 4s ease-in-out infinite;
-    }
+        p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-top: 20px;
+        }
 
-    .btn2:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px #00ff99;
-    }
+        .btn {
+            margin-top: 25px;
+            display: inline-block;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00ffff;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
 
-    @keyframes balanceBtn {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.05) rotate(1deg); }
-    }
+        .btn.visible {
+            transform: scale(1);
+            opacity: 1;
+            animation: balanceBtn 4s ease-in-out infinite;
+        }
 
-    /* Fondo animado */
-    .bg {
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(0,255,255,0.1) 10%, transparent 10%),
-                  radial-gradient(circle, rgba(255,0,255,0.1) 10%, transparent 10%);
-      background-position: 0 0, 50px 50px;
-      background-size: 100px 100px;
-      animation: moveBg 10s linear infinite;
-      z-index: -1;
-      opacity: 0.6;
-    }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #ff00ff;
+        }
 
-    @keyframes moveBg {
-      0% { transform: translate(0, 0); }
-      50% { transform: translate(-50px, -50px); }
-      100% { transform: translate(0, 0); }
-    }
+        .btn2 {
+            margin-top: 15px;
+            display: inline-block;
+            background: linear-gradient(90deg, #00ff99, #0099ff);
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px #00ff99;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      h2 { font-size: 1.3rem; }
-      h3 { font-size: 1.1rem; }
-    }
-  </style>
+        .btn2.visible {
+            transform: scale(1);
+            opacity: 1;
+            animation: balanceBtn 4s ease-in-out infinite;
+        }
+
+        .btn2:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #00ff99;
+        }
+
+        @keyframes balanceBtn {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.05) rotate(1deg);
+            }
+        }
+
+        /* Fondo animado */
+        .bg {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 10%, transparent 10%),
+                radial-gradient(circle, rgba(255, 0, 255, 0.1) 10%, transparent 10%);
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
+            animation: moveBg 10s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes moveBg {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-50px, -50px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="bg"></div>
+    <div class="bg"></div>
 
-  <h1 id="text1">Dicen que los 20 se celebran con estilo... 💃🕺</h1>
-  <h2 id="text2">Y esta vez, ¡la piscina Villa Azul será testigo! 💦</h2>
-  <h3 id="text3">14 de noviembre del 2025<br>De 4:00 p.m. a 2:00 a.m.</h3>
-  <p id="text4">Prepárate para una noche llena de luces, risas y buena vibra 🔥</p>
+    <h1 id="text1">Dicen que los 20 se celebran con estilo... 💃🕺</h1>
+    <h2 id="text2">Y esta vez, ¡la piscina Villa Azul será testigo! 💦</h2>
+    <h3 id="text3">14 de noviembre del 2025<br>De 4:00 p.m. a 2:00 a.m.</h3>
+    <p id="text4">Prepárate para una noche llena de luces, risas y buena vibra 🔥</p>
 
-  <a id="btn" class="btn" href="https://wa.me/573026702668?text=¡Confirmo%20mi%20asistencia%20a%20tu%20cumple,%20Willy!%20🎉" target="_blank">Confirmar asistencia 💬</a>
+    <a id="btn" class="btn"
+        href="https://wa.me/573026702668?text=¡Confirmo%20mi%20asistencia%20a%20tu%20cumple,%20Willy!%20🎉"
+        target="_blank">Confirmar asistencia 💬</a>
 
-  <a id="btn2" class="btn2" href="/Video/ComoLlegar.mp4" download>📍 Cómo llegar</a>
+    <a id="btn2" class="btn2" href="/Video/ComoLlegar.mp4" download>📍 Cómo llegar</a>
 
-  <script>
-    const elements = [
-      document.getElementById('text1'),
-      document.getElementById('text2'),
-      document.getElementById('text3'),
-      document.getElementById('text4'),
-      document.getElementById('btn'),
-      document.getElementById('btn2')
-    ];
+    <script>
+        const elements = [
+            document.getElementById('text1'),
+            document.getElementById('text2'),
+            document.getElementById('text3'),
+            document.getElementById('text4'),
+            document.getElementById('btn'),
+            document.getElementById('btn2')
+        ];
 
-    let delay = 1400;
-    elements.forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), delay * (i + 1));
-    });
-  </script>
+        let delay = 1400;
+        elements.forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), delay * (i + 1));
+        });
+    </script>
 
-  <!-- 🔊 Botón para activar música -->
-<button id="playMusic" class="neon-button">🎵 Activar música</button>
+    <!-- 🔊 Botón de música -->
+    <button id="playMusic" class="neon-button music-btn">🎵</button>
 
-<!-- 🎶 Audio de fondo -->
-<audio id="bg-music" loop>
-  <source src="/Video/invitatuamiguito.mp3" type="audio/mpeg">
-</audio>
+    <!-- 🎶 Audio de fondo -->
+    <audio id="bg-music" loop>
+        <source src="/Video/invitatuamiguito.mp3" type="audio/mpeg">
+    </audio>
 
-<script>
-  const music = document.getElementById('bg-music');
-  const playBtn = document.getElementById('playMusic');
+    <script>
+        const music = document.getElementById('bg-music');
+        const playBtn = document.getElementById('playMusic');
 
-  playBtn.addEventListener('click', () => {
-    music.play()
-      .then(() => {
-        playBtn.style.display = 'none'; // Oculta el botón una vez empieza la música
-      })
-      .catch(error => {
-        console.log("Error al reproducir música:", error);
-      });
-  });
-</script>
+        playBtn.addEventListener('click', () => {
+            music.play()
+                .then(() => {
+                    playBtn.style.display = 'none'; // Oculta el botón al empezar la música
+                })
+                .catch(error => {
+                    console.log("Error al reproducir música:", error);
+                });
+        });
+    </script>
+    <style>
+        /* Botón de música - estilo neón */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 22px;
+            background: transparent;
+            border: 2px solid #0ff;
+            color: #0ff;
+            text-shadow: 0 0 10px #0ff;
+            box-shadow: 0 0 15px #0ff;
+            z-index: 999;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #0ff, 0 0 50px #0ff;
+        }
+
+        /* Animación para que brille suavemente */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 10px #0ff;
+            }
+
+            50% {
+                box-shadow: 0 0 25px #0ff;
+            }
+
+            100% {
+                box-shadow: 0 0 10px #0ff;
+            }
+        }
+    </style>
 </body>
+
 </html>
