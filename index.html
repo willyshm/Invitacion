@@ -170,10 +170,6 @@
 </head>
 <body>
 
-    <audio id="bg-music" autoplay loop>
-  <source src="/Video/invitatuamiguito.mp3" type="audio/mpeg">
-</audio>
-
   <div class="bg"></div>
 
   <h1 id="text1">Dicen que los 20 se celebran con estilo... 💃🕺</h1>
@@ -200,5 +196,28 @@
       setTimeout(() => el.classList.add('visible'), delay * (i + 1));
     });
   </script>
+
+  <!-- 🔊 Botón para activar música -->
+<button id="playMusic" class="neon-button">🎵 Activar música</button>
+
+<!-- 🎶 Audio de fondo -->
+<audio id="bg-music" loop>
+  <source src="/Video/invitatuamiguito.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById('bg-music');
+  const playBtn = document.getElementById('playMusic');
+
+  playBtn.addEventListener('click', () => {
+    music.play()
+      .then(() => {
+        playBtn.style.display = 'none'; // Oculta el botón una vez empieza la música
+      })
+      .catch(error => {
+        console.log("Error al reproducir música:", error);
+      });
+  });
+</script>
 </body>
 </html>
