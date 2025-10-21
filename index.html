@@ -248,15 +248,15 @@ html, body {
         });
     </script>
 
-   <!-- 🔊 Botón de música -->
+ <!-- 🔊 Botón de música -->
 <div class="music-container">
-  <button id="playMusic" class="neon-button music-btn">🎵</button>
-  <p id="musicHint" class="music-hint">Toca para escuchar 🎶</p>
+  <button id="playMusic" class="music-btn">🎵</button>
+  <p id="musicHint" class="music-hint visible-hint">Toca para escuchar 🎶</p>
 </div>
 
 <!-- 🎶 Audio de fondo -->
 <audio id="bg-music" loop>
-  <source src="/Video/invitatuamiguito.mp3" type="audio/mpeg">
+  <source src="cancion.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -264,12 +264,12 @@ html, body {
   const playBtn = document.getElementById('playMusic');
   const hint = document.getElementById('musicHint');
 
+  // Al presionar el botón, reproduce la música y mantiene visible el texto
   playBtn.addEventListener('click', () => {
     music.play()
       .then(() => {
-        playBtn.style.boxShadow = '0 0 25px #0ff, 0 0 50px #0ff';
-        hint.classList.add('fade-out'); // 🔥 hace desaparecer el texto
-        setTimeout(() => hint.style.display = 'none', 800);
+        playBtn.classList.add('playing');
+        hint.textContent = "🎧 ¡Disfruta la música!";
       })
       .catch(error => {
         console.log("Error al reproducir música:", error);
@@ -278,7 +278,7 @@ html, body {
 </script>
 
 <style>
-/* Contenedor del botón y texto */
+/* Contenedor del botón + texto */
 .music-container {
   position: fixed;
   bottom: 20px;
@@ -287,7 +287,7 @@ html, body {
   z-index: 999;
 }
 
-/* Botón de música - estilo neón */
+/* Botón de música estilo neón */
 .music-btn {
   width: 55px;
   height: 55px;
@@ -308,37 +308,41 @@ html, body {
   box-shadow: 0 0 25px #0ff, 0 0 50px #0ff;
 }
 
-/* Texto animado debajo del botón */
+/* Efecto visual cuando la música ya suena */
+.music-btn.playing {
+  border-color: #00ff99;
+  color: #00ff99;
+  box-shadow: 0 0 25px #00ff99, 0 0 50px #00ff99;
+  animation: none;
+}
+
+/* Texto debajo del botón */
 .music-hint {
-  margin-top: 8px;
-  font-size: 0.9rem;
+  margin-top: 6px;
+  font-size: 0.85rem;
   color: #0ff;
   text-shadow: 0 0 10px #0ff;
   animation: blinkText 1.5s infinite;
-  opacity: 0.9;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.3s ease;
 }
 
-/* Animación de parpadeo */
+.music-hint.visible-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animación parpadeante del texto */
 @keyframes blinkText {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.4; }
 }
 
-/* Animación de brillo suave */
+/* Animación del brillo del botón */
 @keyframes pulseGlow {
   0% { box-shadow: 0 0 10px #0ff; }
   50% { box-shadow: 0 0 25px #0ff; }
   100% { box-shadow: 0 0 10px #0ff; }
-}
-
-/* Desvanecer texto al tocar */
-.fade-out {
-  animation: fadeOut 0.8s forwards;
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; transform: translateY(0); }
-  to { opacity: 0; transform: translateY(5px); }
 }
 </style>
 </body>
